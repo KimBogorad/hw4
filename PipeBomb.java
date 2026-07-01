@@ -29,5 +29,15 @@ public class PipeBomb implements Observable {
         System.out.println("BOOM!");
     }
 
-
+    // Bonus:
+    @Override
+    public boolean unregister(TickListener listener) {
+        for (TickListener tickListener : listeners) {
+            if(tickListener == listener) {
+                listeners.remove(tickListener);
+                return true;
+            } 
+        }
+        return false;
+    }
 }
