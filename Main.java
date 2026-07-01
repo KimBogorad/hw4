@@ -1,0 +1,63 @@
+public class Main {
+    private final static int DEFAULT_COUNTDOWN = 160;
+
+    public static void main(String[] args) {
+        int countdown = DEFAULT_COUNTDOWN;
+        if (args.length > 0) {
+            try {
+                countdown = Integer.parseInt(args[0]);
+            } catch (Exception e) {
+                String sb = "Warning: Argument is not a valid integer. Using default countdown %d.", DEFAULT_COUNTDOWN;
+                System.err.println(sb);
+            }
+        }
+        PipeBomb pipebomb = new PipeBomb(countdown);
+        buildEntities(pipebomb);
+        pipebomb.start();
+    }
+
+    public static void buildEntities(PipeBomb pb) {
+        // Snape:
+        StateMachineEntity sme = new StateMachineEntity("Snape", 1, 
+            new State("Snape", 2),
+            new State("Snape", 2),
+            new State("Severus Snape", 4));
+        pb.register(sme);
+
+        // Dumbledore:
+        sme = new StateMachineEntity("Dumbledore", 16, 
+            new State("Dumbledore", 8));
+        pb.register(sme);
+
+        // Ron:
+        sme = new StateMachineEntity("Ron", 33, 
+            new State("Ron", 2),
+            new State("Ron", 2),
+            new State("Ron Weasly", 4));
+        pb.register(sme);
+
+        // Hermione:
+        sme = new StateMachineEntity("Hermione", 49, 
+            new State("Hermione",4),
+            new State("Hermione",4), 
+            new State("Hermione",2),
+            new State("Hermione",2), 
+            new State("Hermione",4));
+        pb.register(sme);
+
+        // Harry Potter:
+        sme = new StateMachineEntity("Harry", 65, 
+            new State("Harry Potter",1), 
+            new State("Harry Potter",1),
+            new State("OoOohhhh",2), 
+            new State("Harry Potter",1), 
+            new State("Harry Potter",1), 
+            new State("YeeeEeaahH",2));
+        pb.register(sme);
+
+        //blank line:
+        pb.register(tick -> {
+            if(tick%8 == 0) System.out.println(); 
+        });
+    }
+}
