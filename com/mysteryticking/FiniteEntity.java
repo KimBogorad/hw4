@@ -1,4 +1,4 @@
-// Bonus: 
+package com.mysteryticking;
 
 public class FiniteEntity implements TickListener{
     private TickListener listener;

@@ -1,3 +1,5 @@
+package com.mysteryticking;
+
 import java.util.function.Predicate;
 
 public class ConditionalEntity implements TickListener {

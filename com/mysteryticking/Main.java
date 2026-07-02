@@ -1,3 +1,5 @@
+package com.mysteryticking;
+
 public class Main {
     private final static int DEFAULT_COUNTDOWN = 160;
 
