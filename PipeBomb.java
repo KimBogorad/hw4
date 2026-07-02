@@ -17,7 +17,9 @@ public class PipeBomb implements Observable {
 
     @Override
     public void notifyListeners(int tick) {
-        for (TickListener listener : listeners) {
+        // in case of removing listeners during iteration, we will use a copy of the list to avoid ConcurrentModificationException
+        List<TickListener> listenersCopy = new ArrayList<>(listeners);
+        for (TickListener listener : listenersCopy) {
             listener.onTick(tick);
         }
     }
@@ -32,12 +34,6 @@ public class PipeBomb implements Observable {
     // Bonus:
     @Override
     public boolean unregister(TickListener listener) {
-        for (TickListener tickListener : listeners) {
-            if(tickListener == listener) {
-                listeners.remove(tickListener);
-                return true;
-            } 
-        }
-        return false;
+        return listeners.remove(listener);
     }
 }

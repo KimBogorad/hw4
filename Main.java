@@ -7,8 +7,8 @@ public class Main {
             try {
                 countdown = Integer.parseInt(args[0]);
             } catch (Exception e) {
-                String sb = "Warning: Argument is not a valid integer. Using default countdown %d.", DEFAULT_COUNTDOWN;
-                System.err.println(sb);
+                String errmsg = "Warning: Argument is not a valid integer. Using default countdown ("+ DEFAULT_COUNTDOWN+ ").";
+                System.err.println(errmsg);
             }
         }
         PipeBomb pipebomb = new PipeBomb(countdown);
@@ -54,6 +54,17 @@ public class Main {
             new State("Harry Potter",1), 
             new State("YeeeEeaahH",2));
         pb.register(sme);
+
+        // Bonus1:
+        sme = new StateMachineEntity("Bonus1", 1, 
+            new State("BANANAS", 1));
+        pb.register(new FiniteEntity(sme, pb, 5));
+
+        // Bonus2:
+        ConditionalEntity ce = new ConditionalEntity(tick -> tick%10 == 0, "got milk?");
+        pb.register(ce);
+        ConditionalEntity ce2 = new ConditionalEntity(tick -> tick%15 == 0, "got cookies?");
+        pb.register(ce2);
 
         //blank line:
         pb.register(tick -> {

@@ -8,13 +8,10 @@ public class StateMachineEntity implements TickListener {
     private final int cycLen;
     private final List<State> states;
     private final Map<Integer, State> stateEntryMap;
-    private boolean didFire;
-    //can add more fields to implement this
 
     public StateMachineEntity(String entityName, int startTick, State... states) {
         this.entityName = entityName;
         this.startTick = startTick;
-        didFire = false;
         if(states == null || states.length == 0) {
             throw new IllegalArgumentException("Entity must have at least one state!");
         }
@@ -35,14 +32,9 @@ public class StateMachineEntity implements TickListener {
         State currentState = stateEntryMap.get(posInCycle);
         if(currentState != null) {//name can't be null
             System.out.println(currentState.name());
-            didFire = true;
         }
-        else didFire = false;
     }
 
     @Override
     public String toString() { return entityName; }
-
-    // getters
-    public boolean getDidFire() { return didFire; }
 }

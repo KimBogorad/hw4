@@ -9,16 +9,16 @@ public class FiniteEntity implements TickListener{
     public FiniteEntity(TickListener listener, Observable observable, int maxFires) {
         this.listener = listener;
         this.observable = observable;
-        this.maxFires = maxFires; //assuming maxFires >= 0
+        if (maxFires < 0) throw new IllegalArgumentException("maxFires cannot be negative.");
+        this.maxFires = maxFires;
         firings = 0;
     }
 
     @Override
     public void onTick(int tick) {
         listener.onTick(tick);
-        if (listener.getDidFire())
-        //check if fired - if so firings++
+        firings++;
         if (firings == maxFires)
-            observable.unregister(this); //here this object dies.
+            observable.unregister(this);
     }
 }
