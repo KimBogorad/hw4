@@ -57,17 +57,6 @@ public class Main {
             new State("YeeeEeaahH",2));
         pb.register(sme);
 
-        // Bonus1:
-        sme = new StateMachineEntity("Bonus1", 1, 
-            new State("BANANAS", 1));
-        pb.register(new FiniteEntity(sme, pb, 5));
-
-        // Bonus2:
-        ConditionalEntity ce = new ConditionalEntity(tick -> tick%10 == 0, "got milk?");
-        pb.register(ce);
-        ConditionalEntity ce2 = new ConditionalEntity(tick -> tick%15 == 0, "got cookies?");
-        pb.register(ce2);
-
         //blank line:
         pb.register(tick -> {
             if(tick%8 == 0) System.out.println(); 
